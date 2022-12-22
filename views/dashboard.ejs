@@ -1,0 +1,73 @@
+<%- include('partials/header') -%>
+<div class="container">
+  <div class="row mt-5">
+      <div class="col-6">
+          <div>
+              <a href="/logout" class="col-3 btn btn-primary">Logout</a>
+            </div>
+            <div class="mt-5">
+            
+            <h1> <%= user.userName %> Habit Tracker</h1>          
+            <form action="/dashboard/createHabit" method="POST">
+              <div class="mb-3">
+                
+                  <input type="text" class="form-control"  name="icon" placeholder="icon">
+              </div>
+              <div class="mb-3">
+                  <input type="text" class="form-control"  name="habit" placeholder="habit">
+              </div>
+              <div class="mb-3">
+                <input type="number" class="form-control"  name="increment" placeholder="increm...">
+              </div>
+              <div>
+                <input type="text" class="form-control"  name="unit" placeholder="unit">
+              </div>
+              <button type="submit" class="btn btn-primary">Track</button>
+            </form>
+          </div>
+      </div>
+      <div class="col-6">
+        <h2>Your habits:</h2>
+        <ul class="row list-unstyled">
+        <% for(const habit of habits) {%>
+          <li class="col-6 justify-content-between mt-5">
+              <div>
+                <span><%= habit.icon%></span>
+                <span><%= habit.habit%></span>
+                <span>
+                 <form
+                class="col-1"
+                action="/dashboard/increment/<%= habit.id %>?_method=PUT"
+                method="POST"
+              >
+                <button class="btn btn-primary" type="submit">+</button>
+              </form>
+              <%= habit.progress%>
+              <form
+                class="col-1"
+                action="/dashboard/decrement/<%= habit.id %>?_method=PUT"
+                method="POST"
+              >
+              <button class="btn btn-primary" type="submit">-</button>
+            </form>
+            </span>
+            <span><%= habit.unit%></span>
+            <span>
+              <form
+              action="/dashboard/deleteHabit/<%= habit.id %>?_method=DELETE"
+              method="POST"
+              class="col-3"
+              >
+             <button class="btn btn-primary fa fa-trash" type="submit"></button>
+            </form>
+            </span>
+            </div>
+          </li>
+        <% } %>            
+        </ul>
+    </div>
+  </div>
+</div>
+</div>
+        
+<%- include('partials/footer') -%>
