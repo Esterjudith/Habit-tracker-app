@@ -18,7 +18,11 @@ html {
   --deep-grey: #65656c;
   --grey: #2d3652;
   --light-grey: #e0e2e2;
+
+  /* other variables */
+  --text-decoration: none;
 }
+
 body {
   background: white;
   font-family: "Quicksand", sans-serif;
@@ -90,8 +94,13 @@ small,
 .btn {
   margin-bottom: 1rem;
   padding: 0.75rem 1.5rem;
+  width: 35%;
   background: #f1f5f9;
   box-shadow: 8px 8px 16px #c9d9e8, -8px -8px 16px #ffffff;
   border-radius: 24px;
   border: none;
+}
+
+a {
+  text-decoration: var(--text-decoration);
 }
