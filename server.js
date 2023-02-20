@@ -13,6 +13,7 @@ const logsRoutes = require("./routes/logs");
 const dashboardRoutes = require("./routes/dashboard");
 const logsController = require("./controllers/logs")
 const cron = require("node-cron")
+const path = require("path");
 
 
 cron.schedule("0 23 11 * * *", () => {
@@ -27,14 +28,18 @@ require("dotenv").config({ path: "./config/.env" });
 // Passport config
 require("./config/passport")(passport);
 
+//Static Folder
+app.use(express.static(path.join(__dirname, 'public')));
+console.log(('public'));
+
 //Connect To Database
 connectDB();
 
 //Using EJS for views
 app.set("view engine", "ejs");
 
-//Static Folder
-app.use(express.static("public"));
+
+
 
 //Body Parsing
 app.use(express.urlencoded({ extended: true }));
